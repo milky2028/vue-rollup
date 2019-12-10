@@ -14,7 +14,7 @@
 import Vue from 'vue'
 export default Vue.extend({
   mounted() {
-    const array = [[10], 40, 50, 60];
+    const array: string[] = [[10], 40, 50, 60];
     console.log(array.flat());
   }
 })

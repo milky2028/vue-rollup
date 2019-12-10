@@ -22,6 +22,7 @@ export default {
     // typescript(),
     babel({
       extensions,
+      presets: ["@vue/cli-plugin-babel/preset"],
       runtimeHelpers: true,
       include: ["src/**/*"],
       exclude: ["node_modules/**"]

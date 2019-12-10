@@ -1,5 +1,5 @@
 import vue from "rollup-plugin-vue";
-// import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript";
 // import { terser } from "rollup-plugin-terser";
 import resolve from "rollup-plugin-node-resolve";
 import css from "rollup-plugin-css-only";
@@ -19,7 +19,7 @@ export default {
   },
   plugins: [
     resolve({ extensions }),
-    // typescript(),
+    typescript(),
     babel({
       extensions,
       presets: ["@vue/cli-plugin-babel/preset"],

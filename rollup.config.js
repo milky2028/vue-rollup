@@ -3,7 +3,9 @@ import typescript from "rollup-plugin-typescript";
 import { terser } from "rollup-plugin-terser";
 import nodeResolve from "rollup-plugin-node-resolve";
 import css from "rollup-plugin-css-only";
+import rimraf from "rimraf";
 
+rimraf.sync("rollup-dist");
 export default {
   input: "src/main.ts",
   output: {
@@ -12,5 +14,11 @@ export default {
     entryFileNames: "[name]-[hash].js",
     chunkFileNames: "[name]-[hash].js"
   },
-  plugins: [nodeResolve(), typescript(), css(), vue({ css: false }), terser()]
+  plugins: [
+    nodeResolve(),
+    typescript(),
+    css({ output: "rollup-dist/bundle.css" }),
+    vue({ css: false }),
+    terser()
+  ]
 };

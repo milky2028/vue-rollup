@@ -117,9 +117,6 @@ export default Vue.extend({
   name: "HelloWorld",
   props: {
     msg: String
-  },
-  mounted() {
-    err = blah;
   }
 });
 </script>

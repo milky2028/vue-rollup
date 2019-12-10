@@ -1,9 +1,12 @@
 import vue from "rollup-plugin-vue";
-import typescript from "rollup-plugin-typescript";
-import { terser } from "rollup-plugin-terser";
-import nodeResolve from "rollup-plugin-node-resolve";
+// import typescript from "rollup-plugin-typescript";
+// import { terser } from "rollup-plugin-terser";
+import resolve from "rollup-plugin-node-resolve";
 import css from "rollup-plugin-css-only";
 import rimraf from "rimraf";
+import babel from "rollup-plugin-babel";
+
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
 rimraf.sync("rollup-dist");
 export default {
@@ -15,10 +18,16 @@ export default {
     chunkFileNames: "[name]-[hash].js"
   },
   plugins: [
-    nodeResolve(),
-    typescript(),
+    resolve({ extensions }),
+    // typescript(),
+    babel({
+      extensions,
+      runtimeHelpers: true,
+      include: ["src/**/*"],
+      exclude: ["node_modules/**"]
+    }),
     css({ output: "rollup-dist/bundle.css" }),
-    vue({ css: false }),
-    terser()
+    vue({ css: false })
+    // terser()
   ]
 };

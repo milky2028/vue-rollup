@@ -11,10 +11,6 @@ export default {
   name: "Home",
   components: {
     HelloWorld
-  },
-  mounted() {
-    const array = [[10], 40, 50, 60];
-    console.log(array.flat());
   }
 };
 </script>

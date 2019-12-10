@@ -9,3 +9,13 @@
   font-size: 40px;
 }
 </style>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+  mounted() {
+    const array = [[10], 40, 50, 60];
+    console.log(array.flat());
+  }
+})
+</script>

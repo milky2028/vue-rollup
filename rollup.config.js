@@ -10,9 +10,12 @@ import progress from 'rollup-plugin-progress';
 import environmentPlugin from './lib/environment-plugin';
 import { readFileSync } from 'fs';
 
-const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+if (!process.env.MODE) {
+  throw new Error('No environment mode specified');
+}
 
 rimraf.sync('rollup-dist');
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const environment = readFileSync(
   `./environments/${process.env.MODE}.ts`,
   'utf-8'

@@ -11,11 +11,14 @@
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
+import environment from '../environment';
+
 export default Vue.extend({
   mounted() {
-    const array: string[] = [[10], 40, 50, 60];
+    const array: string[] = ['weird'];
     console.log(array.flat());
+    console.log(environment.prop);
   }
-})
+});
 </script>

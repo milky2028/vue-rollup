@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "rollup": "rollup -c rollup.config.js"
+    "rollup": "rollup -c rollup.config.js",
+    "rollup:avhc": "rollup -c rollup.config.js --environment MODE:avhc"
   },
   "dependencies": {
     "comlink": "^4.1.0",
@@ -24,6 +25,7 @@
     "@vue/cli-service": "^4.0.0",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
+    "ejs": "^3.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
@@ -32,9 +34,9 @@
     "rollup": "^1.27.5",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-css-only": "^1.0.0",
-    "rollup-plugin-ejs": "^2.2.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-vue": "^5.1.4",

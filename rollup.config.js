@@ -1,13 +1,13 @@
-// import css from 'rollup-plugin-css-only';
 import vue from 'rollup-plugin-vue';
 import typescript from 'rollup-plugin-typescript';
-// import { terser } from "rollup-plugin-terser";
+import { terser } from "rollup-plugin-terser";
 import resolve from 'rollup-plugin-node-resolve';
 import rimraf from 'rimraf';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import progress from 'rollup-plugin-progress';
 import environmentPlugin from './lib/environment-plugin';
+import css from 'rollup-plugin-css-chunks';
 import { readFileSync } from 'fs';
 
 if (!process.env.MODE) {
@@ -29,9 +29,10 @@ export default {
     chunkFileNames: '[name]-[hash].js'
   },
   plugins: [
-    environmentPlugin(environment),
     progress(),
+    environmentPlugin(environment),
     resolve({ extensions }),
+    vue({ css: false }),
     typescript(),
     babel({
       extensions,
@@ -40,10 +41,8 @@ export default {
       include: ['src/**/*'],
       exclude: ['node_modules/**']
     }),
-    // minimuze: true
-    postcss({ extract: true }),
-    // css(),
-    vue({ css: false })
-    // terser()
+    postcss({ modules: true, minimize: true }),
+    css({ chunkFileNames: 'chunk-[hash].css', entryFileNames: '[name]-[hash].css' }),
+    terser()
   ]
 };

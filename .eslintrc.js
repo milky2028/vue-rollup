@@ -1,3 +1,4 @@
+ 
 module.exports = {
   root: true,
   env: {
@@ -7,10 +8,14 @@ module.exports = {
     'plugin:vue/recommended',
     'eslint:recommended',
     '@vue/prettier',
-    '@vue/typescript'
+    '@vue/typescript/recommended',
+    '@vue/prettier/@typescript-eslint'
   ],
   rules: {
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'vue/html-self-closing': [
       'error',
       {
@@ -25,6 +30,7 @@ module.exports = {
       { omitLastInOneLineBlock: true }
     ],
     quotes: ['error', 'single', { avoidEscape: true }],
+    'no-shadow': ['error', { builtinGlobals: true, hoist: 'all' }],
     'no-useless-catch': 'error',
     'arrow-parens': ['error', 'always'],
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],

@@ -19,6 +19,7 @@
       ]
     },
     "lib": [
+      "ES2017",
       "esnext",
       "dom",
       "dom.iterable",

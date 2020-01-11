@@ -18,7 +18,9 @@ export default Vue.extend({
   mounted() {
     const array: string[] = ['weird'];
     console.log(array.flat());
-    console.log(environment.prop);
+    console.log(environment.prop1);
+    // const w = new Worker('../worker/worker.ts');
+    // w.postMessage("hey!");
   }
 });
 </script>

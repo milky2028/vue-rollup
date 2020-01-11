@@ -1,1 +1,1 @@
-export default {} as { [key: string]: any };
+export default {} as { prop1: string, env: string};

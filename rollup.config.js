@@ -10,6 +10,7 @@ import environmentPlugin from './lib/environment-plugin';
 import html, { makeHtmlAttributes } from '@rollup/plugin-html';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
+import omt from '@surma/rollup-plugin-off-main-thread';
 // import css from 'rollup-plugin-css-chunks';
 import { minify } from 'html-minifier';
 import { readFileSync } from 'fs';
@@ -49,7 +50,7 @@ export default {
   input: 'src/main.ts',
   output: {
     dir: 'rollup-dist',
-    format: 'esm',
+    format: 'amd',
     entryFileNames: '[name]-[hash].js',
     chunkFileNames: '[name]-[hash].js'
   },
@@ -67,6 +68,7 @@ export default {
       include: ['src/**/*'],
       exclude: ['node_modules/**']
     }),
+    omt(),
     replace({
       'process.env.NODE_ENV': "'production'",
       'process.env.BASE_URL': "'/'"

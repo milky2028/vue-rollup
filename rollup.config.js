@@ -46,43 +46,70 @@ const environment = readFileSync(
   `./environments/${process.env.MODE}.ts`,
   'utf-8'
 );
-export default {
-  input: 'src/main.ts',
-  output: {
-    dir: 'rollup-dist',
-    format: 'amd',
-    entryFileNames: '[name]-[hash].js',
-    chunkFileNames: '[name]-[hash].js'
-  },
-  plugins: [
-    progress(),
-    resolve({ extensions }),
-    commonjs(),
-    environmentPlugin(environment),
-    typescript(),
-    vue(),
-    babel({
-      extensions,
-      presets: ['@vue/cli-plugin-babel/preset'],
-      runtimeHelpers: true,
-      include: ['src/**/*'],
-      exclude: ['node_modules/**']
-    }),
-    omt(),
-    replace({
-      'process.env.NODE_ENV': "'production'",
-      'process.env.BASE_URL': "'/'"
-    }),
-    html({
-      attributes: {
-        html: {
-          lang: 'en'
+export default [
+  {
+    input: {
+      main: 'src/main.ts'
+    },
+    output: {
+      dir: 'rollup-dist',
+      format: 'amd',
+      entryFileNames: '[name]-[hash].js',
+      chunkFileNames: '[name]-[hash].js'
+    },
+    plugins: [
+      progress(),
+      resolve({ extensions }),
+      commonjs(),
+      environmentPlugin(environment),
+      typescript(),
+      vue(),
+      babel({
+        extensions,
+        presets: ['@vue/cli-plugin-babel/preset'],
+        runtimeHelpers: true,
+        include: ['src/**/*'],
+        exclude: ['node_modules/**']
+      }),
+      omt(),
+      replace({
+        'process.env.NODE_ENV': "'production'",
+        'process.env.BASE_URL': "'/'"
+      }),
+      html({
+        attributes: {
+          html: {
+            lang: 'en'
+          }
+        },
+        template: createTemplate
+      }),
+      // css({ chunkFileNames: 'chunk-[hash].css', entryFileNames: '[name]-[hash].css' }),
+      postcss({ minimize: true }),
+      terser({
+        output: {
+          comments: false
         }
-      },
-      template: createTemplate
-    }),
-    // css({ chunkFileNames: 'chunk-[hash].css', entryFileNames: '[name]-[hash].css' }),
-    postcss({ minimize: true }),
-    terser()
-  ]
-};
+      })
+    ]
+  },
+  {
+    input: {
+      sw: 'sw/sw.ts'
+    },
+    output: {
+      dir: 'rollup-dist',
+      format: 'esm'
+    },
+    context: 'self',
+    plugins: [
+      progress(),
+      typescript(),
+      terser({
+        output: {
+          comments: false
+        }
+      })
+    ]
+  }
+];

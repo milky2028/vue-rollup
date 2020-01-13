@@ -14,6 +14,7 @@ import omt from '@surma/rollup-plugin-off-main-thread';
 // import css from 'rollup-plugin-css-chunks';
 import { minify } from 'html-minifier';
 import { readFileSync } from 'fs';
+import assetsPlugin from './lib/assetsPlugin';
 
 if (!process.env.MODE) {
   throw new Error('No environment mode specified');
@@ -63,6 +64,7 @@ export default [
       progress(),
       resolve({ extensions }),
       commonjs(),
+      assetsPlugin('src/assets'),
       environmentPlugin(environment),
       typescript(),
       vue(),

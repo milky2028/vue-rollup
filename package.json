@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "rollup": "rollup -c rollup.config.js",
-    "rollup:avhc": "rollup -c rollup.config.js --environment MODE:avhc"
+    "rollup:avhc": "rollup -c rollup.config.js --environment MODE:avhc",
+    "rollup-watch:avhc": "rollup -c rollup.config.js --environment MODE:avhc -w"
   },
   "dependencies": {
     "comlink": "^4.1.0",

@@ -13,16 +13,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import environment from '../environment';
+import { wrap } from 'comlink';
 
 export default Vue.extend({
-  mounted() {
+  async mounted() {
     console.log('About it');
     console.log('bird' + 1);
     const array: string[] = ['weird'];
     console.log(array.flat());
     console.log(environment.prop1);
-    const w = new Worker('../worker/worker.ts');
-    w.postMessage('hey!');
+    const w = wrap(new Worker('../../worker/worker.ts'));
+    console.log(await w.sayHi());
   }
 });
 </script>

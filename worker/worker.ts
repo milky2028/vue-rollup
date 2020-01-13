@@ -1,3 +1,9 @@
-self.addEventListener('message', (msg) => {
-  console.log(`Message from worker: ${msg.data}`);
-});
+import { expose } from 'comlink';
+
+class API {
+  sayHello() {
+    return 'Hello!';
+  }
+}
+
+expose(API);

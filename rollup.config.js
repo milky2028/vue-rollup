@@ -21,6 +21,7 @@ if (!process.env.MODE) {
 
 function createTemplate({ attributes, files, publicPath }) {
   const scripts = (files.js || [])
+    .filter(({ fileName }) => !fileName.includes('worker'))
     .map(({ fileName }) => {
       const attrs = makeHtmlAttributes(attributes.script);
       return `<script src="${publicPath}${fileName}"${attrs}></script>`;
@@ -57,6 +58,7 @@ export default [
       entryFileNames: '[name]-[hash].js',
       chunkFileNames: '[name]-[hash].js'
     },
+    context: 'self',
     plugins: [
       progress(),
       resolve({ extensions }),
@@ -68,7 +70,6 @@ export default [
         extensions,
         presets: ['@vue/cli-plugin-babel/preset'],
         runtimeHelpers: true,
-        include: ['src/**/*'],
         exclude: ['node_modules/**']
       }),
       omt(),
@@ -105,6 +106,12 @@ export default [
     plugins: [
       progress(),
       typescript(),
+      babel({
+        extensions,
+        runtimeHelpers: true,
+        presets: ['@babel/preset-env'],
+        exclude: ['node_modules/**']
+      }),
       terser({
         output: {
           comments: false

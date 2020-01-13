@@ -1,1 +1,1 @@
-export default ['bird'];
+export default ['/'];

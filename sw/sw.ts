@@ -13,7 +13,7 @@ self.addEventListener('install', (installEvent) => {
     (async () => {
       // Cache an essential group of items on load
       const cache = await caches.open(staticCache);
-      return cache.addAll(resources);
+      await cache.addAll(resources);
     })()
   );
 });
@@ -26,7 +26,7 @@ self.addEventListener('activate', (activationEvent) => {
         .filter((c) => c !== staticCache)
         .map((cache) => self.caches.delete(cache));
 
-      return Promise.all(cachesToDelete);
+      await Promise.all(cachesToDelete);
     })()
   );
 });
